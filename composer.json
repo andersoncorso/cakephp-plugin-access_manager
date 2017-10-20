@@ -1,5 +1,5 @@
 {
-    "name": "your-name-here/AccessManager",
+    "name": "andersoncorso/cakephp-plugin-access_manager",
     "description": "AccessManager plugin for CakePHP",
     "type": "cakephp-plugin",
     "license": "MIT",
@@ -19,5 +19,7 @@
             "AccessManager\\Test\\": "tests",
             "Cake\\Test\\": "./vendor/cakephp/cakephp/tests"
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
