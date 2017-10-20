@@ -1,11 +1,21 @@
-# AccessManager plugin for CakePHP
+# Plugin "AccessManager" para CakePHP 3x
 
-## Installation
+## Instalação
 
-You can install this plugin into your CakePHP application using [composer](http://getcomposer.org).
+Você pode instalar este plugin no seu aplicativo CakePHP usando [composer](http://getcomposer.org).
 
-The recommended way to install composer packages is:
+Instalação via composer:
 
 ```
-composer require your-name-here/AccessManager
+composer require andersoncorso/cakephp-plugin-access_manager
+```
+
+Ativando o plugin via console:
+```
+bin/cake plugin load AccessManager
+```
+
+Ou você pode ativar manualmente no arquivo `config\bootstrap.php`, inserindo o comando abaixo:
+```php
+Plugin::load('AccessManager');
 ```
