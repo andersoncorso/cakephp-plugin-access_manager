@@ -4,7 +4,7 @@
     "type": "cakephp-plugin",
     "license": "MIT",
     "require": {
-        "andersoncorso/cakephp-plugin_places": "dev"
+        "andersoncorso/cakephp-plugin_places": "dev-master"
     },
     "autoload": {
         "psr-4": {
