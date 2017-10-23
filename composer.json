@@ -6,8 +6,6 @@
     "require": {
         "andersoncorso/cakephp-plugin_places": "dev-master"
     },
-    "require-dev": {
-    },
     "autoload": {
         "psr-4": {
             "AccessManager\\": "src"
@@ -19,6 +17,5 @@
             "Cake\\Test\\": "./vendor/cakephp/cakephp/tests"
         }
     },
-    "minimum-stability": "dev",
     "prefer-stable": true
 }
