@@ -42,11 +42,11 @@ class GroupsTable extends Table
         $this->addBehavior('Acl.Acl', ['type' => 'requester']);
         $this->addBehavior('Timestamp');
 
-        $this->hasMany('Roles', [
+        $this->hasMany('AccessManager.Roles', [
             'foreignKey' => 'group_id',
             'className' => 'AccessManager.Roles'
         ]);
-        $this->hasMany('Users', [
+        $this->hasMany('AccessManager.Users', [
             'foreignKey' => 'group_id',
             'className' => 'AccessManager.Users'
         ]);

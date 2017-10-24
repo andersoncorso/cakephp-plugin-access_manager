@@ -27,12 +27,22 @@
 	<dt></dt>
 	<dd>
 		<br>
+		<?php
+			if(isset($user->profile)){
+				echo $this->Html->link(__('Ver Perfil'), ['controller'=>'Profiles', 'action'=>'view', $user->profile->id, 'plugin'=>'AccessManager'], ['class'=>'btn btn-primary']);
+			}
+		?>
+	</dd>
+	
+	<dt></dt>
+	<dd>
+		<br>
 		<ul class="list-inline">
 			<li>
-				<?= $this->Html->link(__('Editar'), ['action'=>'edit', $user->id, 'plugin'=>'AccessManager'], ['class'=>'btn btn-primary btn-xs']) ?>
+				<?= $this->Html->link(__('Editar'), ['action'=>'edit', $user->id, 'plugin'=>'AccessManager'], ['class'=>'btn-link btn-xs']) ?>
 			</li>
 			<li>
-				<?= $this->Form->postLink(__('Excluir'), ['action' => 'delete', $user->id, 'plugin'=>'AccessManager'], ['confirm' => __('Confirma a exclusão deste registro?'), 'class'=>'btn btn-danger btn-xs']) ?>
+				<?= $this->Form->postLink(__('Excluir'), ['action' => 'delete', $user->id, 'plugin'=>'AccessManager'], ['confirm' => __('Confirma a exclusão deste registro?'), 'class'=>'btn-link btn-xs']) ?>
 			</li>
 		</ul>
 	</dd>

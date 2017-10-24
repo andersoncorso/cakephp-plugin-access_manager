@@ -36,22 +36,23 @@ class UsersTable extends Table
 		parent::initialize($config);
 
 		$this->setTable('users');
-		$this->setDisplayField('id');
+		$this->setDisplayField('email');
 		$this->setPrimaryKey('id');
 
 		$this->addBehavior('Acl.Acl', ['type' => 'requester']);
 		$this->addBehavior('Timestamp');
 
-		$this->belongsTo('Groups', [
+		$this->belongsTo('AccessManager.Groups', [
 			'foreignKey' => 'group_id',
 			'joinType' => 'INNER',
 			'className' => 'AccessManager.Groups'
 		]);
-		$this->belongsTo('Roles', [
+		$this->belongsTo('AccessManager.Roles', [
 			'foreignKey' => 'role_id',
 			'joinType' => 'INNER',
 			'className' => 'AccessManager.Roles'
 		]);
+		$this->hasOne('AccessManager.Profiles');
 	}
 
 	/**
@@ -89,6 +90,34 @@ class UsersTable extends Table
 
 		return $validator;
 	}
+	
+	/**
+	 * WithProfile validation rules.
+	 *
+	 * @param \Cake\Validation\Validator $validator Validator instance.
+	 * @return \Cake\Validation\Validator
+	 */
+	public function validationWithProfile(Validator $validator) {
+	   
+		$validator
+				->integer('id')
+				->allowEmpty('id', 'create');
+
+		$validator
+				->notEmpty('password', 'Insira uma senha válida.');
+
+		$validator
+				->allowEmpty('email', 'create')
+				->email('email')
+				->add('email', 'unique', [
+						'rule'=>'validateUnique',
+						'provider'=>'table',
+						'message'=>'Este e-mail já está sendo usado por outro usuário.'
+					]
+				);
+
+		return $validator;
+	}
 
 	/**
 	 * Returns a rules checker object that will be used for validating
@@ -112,7 +141,25 @@ class UsersTable extends Table
 	 * @link https://stackoverflow.com/questions/32661318/how-to-retrieve-associations-together-with-authenticated-user-data
 	 */
 	public function findAuth(\Cake\ORM\Query $query, array $options){
-		return $query->contain(['Roles']);
+		return $query->contain([
+			'Groups' => function ($q) {
+				return $q
+					->select(['name']);
+			}, 
+			'Roles' => function ($q) {
+				return $q
+					->select(['name']);
+			}, 
+			'Profiles' => function ($q) {
+				return $q
+					->select([
+						'id',
+						'first_name',
+						'last_name',
+						'full_name' =>$q->func()->concat(['first_name'=>'identifier', ' ', 'last_name'=>'identifier'])
+					]);
+			}
+		]);
 	}
 
 }

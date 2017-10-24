@@ -14,6 +14,10 @@ use Cake\Core\Configure;
 class RolesController extends AppController
 {
 
+	public function initialize() {
+		parent::initialize();
+	}
+
 /**
  ==== FUNÇÕES DE CRUD ====
  */

@@ -42,11 +42,11 @@ class RolesTable extends Table
         $this->addBehavior('Acl.Acl', ['type' => 'requester']);
         $this->addBehavior('Timestamp');
 
-        $this->belongsTo('Groups', [
+        $this->belongsTo('AccessManager.Groups', [
             'foreignKey' => 'group_id',
             'className' => 'AccessManager.Groups'
         ]);
-        $this->hasMany('Users', [
+        $this->hasMany('AccessManager.Users', [
             'foreignKey' => 'role_id',
             'className' => 'AccessManager.Users'
         ]);

@@ -14,6 +14,10 @@ use Cake\Core\Configure;
 class GroupsController extends AppController
 {
 
+    public function initialize() {
+        parent::initialize();
+    }
+
 /**
  ==== FUNÇÕES DE CRUD ====
  */
