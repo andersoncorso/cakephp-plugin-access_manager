@@ -20,15 +20,6 @@
 		<span class="fa fa-unlock form-control-feedback"></span>
 	</div>
 	<div class="row">
-		<!--
-		<div class="col-xs-8">
-			<div class="checkbox icheck">
-				<label>
-					<input type="checkbox"> Lembrar
-				</label>
-			</div>
-		</div>
-		-->
 		<div class="col-xs-12">
 			<?php 
 				echo $this->Form->button('Acessar', 

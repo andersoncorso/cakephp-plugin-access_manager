@@ -19,7 +19,7 @@ class UsersController extends AppController
 	public function initialize() {
 		parent::initialize();
 		
-		$this->Auth->allow(['login', 'logout', 'changeEmail', 'changePassword']);
+		$this->Auth->allow(['login', 'logout']);
 	}
 
 /**
@@ -292,6 +292,11 @@ class UsersController extends AppController
 		return $this->changePassword($user_id);
 	}
 
+
+
+/**
+ ==== FUNÇÕES AUXILIARES ====
+ */
 	protected function __authUpdateSession(){
 
 		// ID do usuário logado
