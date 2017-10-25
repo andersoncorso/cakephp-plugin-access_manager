@@ -21,7 +21,7 @@
             <div class="box box-primary">
                 <div class="box-body">
                     <?= $this->element('Forms/users-edit') ?>
-                <div class="box-body">
+                </div>
             </div>
         </div>
 

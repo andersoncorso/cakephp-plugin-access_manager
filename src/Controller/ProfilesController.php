@@ -19,6 +19,11 @@ class ProfilesController extends AppController
 		parent::initialize();
 	}
 
+	// public $helpers = [
+	// 	'Phone' => [
+	// 		'className' => 'PhoneHelper.Phone'
+	// 	]
+	// ];
 
 /**
  ==== FUNÇÕES DE CRUD ====

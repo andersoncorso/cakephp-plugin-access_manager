@@ -21,7 +21,7 @@
 			<div class="box box-primary">
 				<div class="box-body">
 					<?= $this->element('Forms/roles-edit') ?>
-				<div class="box-body">
+				</div>
 			</div>
 		</div>
 

@@ -15,7 +15,7 @@
             <div class="box box-primary">
                 <div class="box-body">
                     <?= $this->element('Table/profiles-index') ?>
-                <div class="box-body">
+                </div>
             </div>
         </div>
 
