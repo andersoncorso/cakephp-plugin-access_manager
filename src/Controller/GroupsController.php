@@ -23,7 +23,6 @@ class GroupsController extends AppController
  */
     public function index() {
         $groups = $this->paginate($this->Groups);
-
         $this->set(compact('groups'));
     }
 
@@ -31,7 +30,6 @@ class GroupsController extends AppController
         $group = $this->Groups->get($id, [
             'contain' => ['Roles', 'Users']
         ]);
-
         $this->set('group', $group);
     }
 

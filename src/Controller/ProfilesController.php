@@ -25,13 +25,6 @@ class ProfilesController extends AppController
 	public function index() {
 
 		$this->paginate = [
-			'contain' => ['Users', 'Estados', 'Municipios']
-		];
-		$profiles = $this->paginate($this->Profiles);
-
-		$this->set(compact('profiles'));
-
-		$this->paginate = [
 			'sortWhitelist' => [
 				'id',
 				'user_id',
@@ -43,6 +36,7 @@ class ProfilesController extends AppController
 			'order' => [
 				'Profile.full_name' => 'asc'
 			],
+			'contain' => ['Users', 'Estados', 'Municipios'],
 			'limit'=>10000
 		];
 
