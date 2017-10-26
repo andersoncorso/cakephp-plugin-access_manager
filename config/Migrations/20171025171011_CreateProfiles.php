@@ -16,75 +16,75 @@ class CreateProfiles extends AbstractMigration
         $table->addColumn('user_id', 'integer', [
             'default' => null,
             'limit' => 11,
-            'null' => false,
+            'null' => true,
         ]);
         $table->addColumn('first_name', 'string', [
             'default' => null,
             'limit' => 25,
-            'null' => false,
+            'null' => true,
         ]);
         $table->addColumn('last_name', 'string', [
             'default' => null,
             'limit' => 100,
-            'null' => false,
+            'null' => true,
         ]);
         $table->addColumn('cpf', 'char', [
             'default' => null,
             'limit' => 11,
-            'null' => false,
+            'null' => true,
         ]);
         $table->addColumn('phone01', 'string', [
             'default' => null,
             'limit' => 11,
-            'null' => false,
+            'null' => true,
         ]);
         $table->addColumn('logradouro', 'string', [
             'default' => null,
             'limit' => 250,
-            'null' => false,
+            'null' => true,
         ]);
         $table->addColumn('num', 'integer', [
             'default' => null,
             'limit' => 11,
-            'null' => false,
+            'null' => true,
         ]);
         $table->addColumn('complemento', 'string', [
             'default' => null,
             'limit' => 150,
-            'null' => false,
+            'null' => true,
         ]);
         $table->addColumn('setor', 'string', [
             'default' => null,
             'limit' => 100,
-            'null' => false,
+            'null' => true,
         ]);
         $table->addColumn('estado_id', 'integer', [
             'default' => null,
             'limit' => 11,
-            'null' => false,
+            'null' => true,
         ]);
-        $table->addColumn('municipio_id', 'string', [
+        $table->addColumn('municipio_id', 'integer', [
             'default' => null,
             'limit' => 11,
-            'null' => false,
+            'null' => true,
         ]);
         $table->addColumn('cep', 'string', [
             'default' => null,
             'limit' => 10,
-            'null' => false,
+            'null' => true,
         ]);
-        $table->addColumn('caixa_posta', 'integer', [
+        $table->addColumn('caixa_postal', 'integer', [
             'default' => null,
             'limit' => 5,
-            'null' => false,
+            'null' => true,
         ]);
         $table->addColumn('created', 'datetime', [
             'default' => null,
-            'null' => false,
+            'null' => true,
         ]);
         $table->addColumn('modified', 'datetime', [
             'default' => null,
-            'null' => false,
+            'null' => true,
         ]);
         $table->create();
     }
