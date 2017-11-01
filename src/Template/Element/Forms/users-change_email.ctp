@@ -13,7 +13,7 @@
 				<div class="col-sm-6">
 					<?php 
 						echo $this->Form->input('email', 
-							['type'=>'email', 'placeholder'=>'joao@gmail.com', 'label'=>false, 'class'=>'form-control', 'required'=>false]
+							['type'=>'email', 'placeholder'=>'joao@gmail.com', 'label'=>false, 'class'=>'form-control', 'required'=>true]
 						);
 					?>
 				</div>

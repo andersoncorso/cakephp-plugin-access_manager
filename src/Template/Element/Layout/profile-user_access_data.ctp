@@ -7,7 +7,7 @@
 
 <?php if(!empty($user->profile)): ?>
 	<!-- User data -->
-	<div class="box box-default <?php if($this->request->is('mobile')) echo 'collapsed-box'; ?>">
+	<div class="box box-widget widget-user-2<?php if($this->request->is('mobile')) echo 'collapsed-box'; ?>">
 		<?php if($this->request->is('mobile')): ?>
 		<div class="box-header with-border">
 			<h3 class="box-title">Perfil</h3>
@@ -16,22 +16,18 @@
 			</div>
 		</div>
 		<?php endif; ?>
-		<div class="box-body box-profile" <?php if($this->request->is('mobile')) echo 'style="display: none;"'; ?>>
-			<?php 
-				echo $this->Html->image($url_img, 
-					['class'=>'profile-user-img img-responsive img-circle', 'alt'=>'Foto do usuário']
-				);
-			?>
-			<h3 class="profile-username text-center">
-				<?= $user->profile->full_name ?>
-			</h3>
-			<p class="text-muted text-center"><?= $user->role->name ?></p>
+		<div class="widget-user-header">
+			<div class="widget-user-image">
+				<?= $this->Html->image($url_img, ['class'=>'img-responsive img-circle', 'alt'=>'']) ?>
+			</div>
+			<h3 class="widget-user-username"><?= $user->profile->full_name ?></h3>
+			<h5 class="widget-user-desc"><?= $user->role->name ?></h5>
 		</div>
 	</div>
 <?php endif; ?>
 
 <!-- Dados de Acesso -->
-<div class="box box-default <?php if($this->request->is('mobile')) echo 'collapsed-box'; ?>">
+<div class="box box-solid <?php if($this->request->is('mobile')) echo 'collapsed-box'; ?>">
 	<?php if($this->request->is('mobile')): ?>
 	<div class="box-header with-border">
 		<h3 class="box-title">Dados de Acesso</h3>

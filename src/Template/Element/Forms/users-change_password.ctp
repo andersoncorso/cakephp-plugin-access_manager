@@ -13,7 +13,7 @@
 				<div class="col-sm-4">
 					<?php 
 						echo $this->Form->input('password', 
-							['type'=>'password', 'placeholder'=>'Senha', 'label'=>false, 'class'=>'form-control', 'required'=>false, 'data-toggle'=>'password', 'data-message'=>'Clique aqui para mostrar/esconder a senha']
+							['type'=>'password', 'placeholder'=>'Senha', 'label'=>false, 'class'=>'form-control', 'required'=>true, 'data-toggle'=>'password', 'data-message'=>'Clique aqui para mostrar/esconder a senha']
 						);
 					?>
 				</div>

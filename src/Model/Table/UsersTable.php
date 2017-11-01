@@ -85,8 +85,7 @@ class UsersTable extends Table
 
 		$validator
 			->boolean('active')
-			->requirePresence('active', 'create')
-			->notEmpty('active');
+			->allowEmpty('active');
 
 		return $validator;
 	}
@@ -161,5 +160,6 @@ class UsersTable extends Table
 			}
 		]);
 	}
+
 
 }
