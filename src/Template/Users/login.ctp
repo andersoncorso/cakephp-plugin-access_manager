@@ -23,7 +23,7 @@
 		<div class="col-xs-12">
 			<?php 
 				echo $this->Form->button('Acessar', 
-					['class'=>'btn btn-primary btn-block btn-flat btn-lg pull-right', 'id'=>'loadButton', 'data-loading'=>'Aguarde...', 'submitContainer'=>null]
+					['class'=>'btn btn-primary btn-block btn-flat btn-lg pull-right', 'id'=>'loadButton', 'data-loading-text'=>'Aguarde...', 'submitContainer'=>null]
 				);
 			?>
 		</div>
