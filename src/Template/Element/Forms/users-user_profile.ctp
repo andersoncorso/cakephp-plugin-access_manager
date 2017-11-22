@@ -146,7 +146,7 @@
 				<div class="col-sm-2"></div>
 				<div class="col-sm-10">
 					<br>
-					<button type="submit" class="btn btn-lg btn-primary btn-flat pull-left">Atualizar</button>
+					<button type="submit" class="btn btn-lg btn-primary btn-flat pull-left" id="loadButton" data-loading-text="Enviando...">Atualizar</button>
 				</div>
 			</div>
 		</div>
