@@ -22,7 +22,12 @@
 				<div class="col-sm-2"></div>
 				<div class="col-sm-10">
 					<br>
-					<button type="submit" class="btn btn-lg btn-primary btn-flat pull-left">Atualizar</button>
+					<?php 
+						echo $this->Form->button('Atualizar', 
+							['class'=>'btn btn-lg btn-primary btn-flat pull-left', 
+							'id'=>'loadButton', 'data-loading-text'=>'Aguarde...', 'submitContainer'=>null]
+						);
+					?>
 				</div>
 			</div>
 		</div>

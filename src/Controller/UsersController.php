@@ -157,7 +157,7 @@ class UsersController extends AppController
 				$this->__authUpdateSession(); // atualiza dados da sessão do usuário
 
 				$this->Flash->success(__('Os dados foram salvos.'));
-				return $this->redirect(['action'=>$this->request->params['action'], $user->id]);
+				return $this->redirect(['action'=>$this->request->params['action']]);
 			}
 			else {
 				

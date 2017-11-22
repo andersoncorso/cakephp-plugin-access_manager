@@ -17,7 +17,7 @@
 <section class="content">
 	<div class="row">
 		<div class="col-md-3">
-			<?php echo $this->element('Layout/profile-user_access_data'); ?>
+			<?php echo $this->element('Layout/user_profile-aside_box', ['user'=>$user, 'profile'=>$user->profile]); ?>
 		</div>
 		<div class="col-md-9">
 			<?php echo $this->element('Forms/users-change_email'); ?>

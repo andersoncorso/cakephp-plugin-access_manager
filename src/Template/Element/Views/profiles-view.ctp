@@ -34,10 +34,22 @@
 	<dd><?= h($profile->setor) ?></dd>
 
 	<dt><?= __('Estado') ?></dt>
-	<dd><?= h('#'.$profile->estado->id.' - '.$profile->estado->nome) ?></dd>
+	<dd>
+	<?php
+		if(isset($profile->estado)){
+			echo h('#'.$profile->estado->id.' - '.$profile->estado->nome);
+		}
+	?>
+	</dd>
 
 	<dt><?= __('Município') ?></dt>
-	<dd><?= h('#'.$profile->municipio->id.' - '.$profile->municipio->nome) ?></dd>
+	<dd>
+	<?php
+		if(isset($profile->municipio)){
+			echo h('#'.$profile->municipio->id.' - '.$profile->municipio->nome);
+		}
+	?>
+	</dd>
 
 	<dt><?= __('CEP') ?></dt>
 	<dd><?= h($profile->cep) ?></dd>

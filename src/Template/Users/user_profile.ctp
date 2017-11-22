@@ -13,7 +13,7 @@
 	<div class="row">
 		<div class="col-md-3">
 			<!-- E-mail e senha -->
-			<?php echo $this->element('Layout/profile-user_access_data'); ?>
+			<?php echo $this->element('Layout/user_profile-aside_box', ['user'=>$user, 'profile'=>$user->profile]); ?>
 		</div>
 		<div class="col-md-9">
 			<!-- Dados pessoais -->
