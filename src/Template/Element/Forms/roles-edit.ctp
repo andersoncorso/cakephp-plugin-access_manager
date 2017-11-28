@@ -30,7 +30,7 @@
 			<label  class="col-sm-2 control-label">&nbsp;</label>
 			<div class="col-sm-10">
 				<?php 
-					echo $this->Form->button('Cadastrar', 
+					echo $this->Form->button('Atualizar', 
 						['class'=>'btn btn-primary btn-flat btn-lg col-md-3']
 					);
 				?>
