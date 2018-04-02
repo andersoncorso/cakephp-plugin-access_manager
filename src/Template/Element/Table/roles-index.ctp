@@ -5,8 +5,8 @@
 		<thead>
 			<tr>
 				<th>#ID</th>
-				<th><?= __('Grupo') ?></th>
 				<th><?= __('Nome') ?></th>
+				<th><?= __('Grupo') ?></th>
 				<th><?= __('Criado em') ?></th>
 				<th><?= __('Ações') ?></th>
 			</tr>
@@ -15,8 +15,8 @@
 			<?php foreach($roles as $k=>$r): ?>
 			<tr>
 				<td><?= h($r->id) ?></td>
-				<td title="<?= 'Group ID: '.$r->group->id ?>"><?= h($r->group->name) ?></td>
 				<td><?= h($r->name) ?></td>
+				<td title="<?= 'Group ID: '.$r->group->id ?>"><?= h($r->group->name) ?></td>
 				<td><?= h($r->created) ?></td>
 				<td class="actions" style="white-space:nowrap">
 					<div id="dropdown-actions" class="btn-group pull-right">
