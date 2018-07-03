@@ -1,21 +1,32 @@
 {
-    "name": "andersoncorso/cakephp-plugin-access_manager",
-    "description": "AccessManager plugin for CakePHP",
-    "type": "cakephp-plugin",
-    "license": "MIT",
-    "require": {
-    },
-    "autoload": {
-        "psr-4": {
-            "AccessManager\\": "src"
+	"name": "andersoncorso/cakephp-plugin-access_manager",
+	"description": "Plugin para gestão (CRUD) de Grupos, Funções e Usuários no Cakephp 3x",
+	"type": "cakephp-plugin",
+	"keywords": [
+		"cakephp",
+		"groups", "roles", "users"
+	],
+	"homepage": "https://github.com/andersoncorso/cakephp-plugin-access_manager",
+	"license": "MIT",
+    "authors": [
+        {
+            "name": "Anderson",
+            "email": "andersoncorso89@gmail.com",
+            "homepage": "https://github.com/andersoncorso"
         }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "AccessManager\\Test\\": "tests",
-            "Cake\\Test\\": "./vendor/cakephp/cakephp/tests"
-        }
-    },
-    "minimum-stability": "dev",    
-    "prefer-stable": true
+    ],
+	"require": {
+		"cakephp/cakephp": "^3.5"
+	},
+	"autoload": {
+		"psr-4": {
+			"AccessManager\\": "src"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"AccessManager\\Test\\": "tests",
+			"Cake\\Test\\": "./vendor/cakephp/cakephp/tests"
+		}
+	}
 }
