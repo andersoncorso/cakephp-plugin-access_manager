@@ -3,8 +3,7 @@
 	"description": "Plugin para gestão (CRUD) de Grupos, Funções e Usuários no Cakephp 3x",
 	"type": "cakephp-plugin",
 	"keywords": [
-		"cakephp",
-		"groups", "roles", "users"
+		"cakephp", "groups", "roles", "users"
 	],
 	"homepage": "https://github.com/andersoncorso/cakephp-plugin-access_manager",
 	"license": "MIT",
