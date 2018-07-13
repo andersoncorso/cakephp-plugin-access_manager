@@ -14,17 +14,4 @@
 
 	<dt><?= __('Última modificação') ?></dt>
 	<dd><?= h($group->modified) ?></dd>
-	
-	<dt></dt>
-	<dd>
-		<br>
-		<ul class="list-inline">
-			<li>
-				<?= $this->Html->link(__('Editar'), ['action'=>'edit', $group->id, 'plugin'=>'AccessManager'], ['class'=>'btn-link btn-xs']) ?>
-			</li>
-			<li>
-				<?= $this->Form->postLink(__('Excluir'), ['action' => 'delete', $group->id, 'plugin'=>'AccessManager'], ['confirm' => __('Confirma a exclusão deste registro?'), 'class'=>'btn-link btn-xs']) ?>
-			</li>
-		</ul>
-	</dd>
 </dl>

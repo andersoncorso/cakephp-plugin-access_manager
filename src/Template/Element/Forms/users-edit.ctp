@@ -49,38 +49,13 @@
 			<label  class="col-sm-2 control-label">&nbsp;</label>
 			<div class="col-sm-10">
 				<?php 
-					echo $this->Form->button('Atualizar', 
-						['class'=>'btn btn-primary btn-flat btn-lg col-md-3']
-					);
+					echo $this->Form->button('Atualizar', [
+						'class'=>'btn btn-primary btn-flat btn-lg col-md-3',
+						'id'=>'loadButton', 'data-loading-text'=>'Aguarde...', 'submitContainer'=>null
+					]);
 				?>
 			</div>
 		</div>
 	</div>
 
 <?= $this->Form->end() ?>
-
-<?php
-$this->Html->css([
-	// 'AdminLTE./plugins/select2/select2.min',
-  ],
-  ['block' => 'css']);
-
-$this->Html->script([
-  // 'AdminLTE./plugins/select2/select2.full.min',
-  // 'AdminLTE./plugins/input-mask/jquery.inputmask',
-  // 'AdminLTE./plugins/input-mask/jquery.inputmask.date.extensions',
-  // 'AdminLTE./plugins/input-mask/jquery.inputmask.extensions',
-  'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-show-password/1.0.3/bootstrap-show-password.min.js'
-],
-['block' => 'script']);
-?>
-<?php $this->start('scriptBottom'); ?>
-<script>
-  $(function () {
-
-	//Password hide/show
-	$("#password").password('hide');
-
-  });
-</script>
-<?php $this->end(); ?>

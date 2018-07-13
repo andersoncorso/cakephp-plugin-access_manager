@@ -29,9 +29,10 @@
 			<label  class="col-sm-2 control-label">&nbsp;</label>
 			<div class="col-sm-10">
 				<?php 
-					echo $this->Form->button('Cadastrar', 
-						['class'=>'btn btn-primary btn-flat btn-lg col-md-3']
-					);
+					echo $this->Form->button('Cadastrar', [
+						'class'=>'btn btn-primary btn-flat btn-lg col-md-3',
+						'id'=>'loadButton', 'data-loading-text'=>'Aguarde...', 'submitContainer'=>null
+					]);
 				?>
 			</div>
 		</div>

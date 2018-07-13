@@ -50,7 +50,7 @@ class UsersController extends AppController
 		}
 
 		$user = $this->Users->get($id, [
-			'contain' => ['Groups', 'Roles'],
+			'contain' => ['Groups', 'Roles', 'Profiles'],
 		]);
 
 		$this->set('user', $user);
