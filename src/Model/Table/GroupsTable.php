@@ -5,6 +5,8 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Cake\Network\Session;
+use Cake\Core\Configure;
 
 /**
  * Groups Model
@@ -25,50 +27,86 @@ use Cake\Validation\Validator;
 class GroupsTable extends Table
 {
 
-    /**
-     * Initialize method
-     *
-     * @param array $config The configuration for the Table.
-     * @return void
-     */
-    public function initialize(array $config)
-    {
-        parent::initialize($config);
+	/**
+	 * Initialize method
+	 *
+	 * @param array $config The configuration for the Table.
+	 * @return void
+	 */
+	public function initialize(array $config)
+	{
+		parent::initialize($config);
 
-        $this->setTable('groups');
-        $this->setDisplayField('name');
-        $this->setPrimaryKey('id');
+		$this->setTable('groups');
+		$this->setDisplayField('name');
+		$this->setPrimaryKey('id');
 
-        $this->addBehavior('Acl.Acl', ['type' => 'requester']);
-        $this->addBehavior('Timestamp');
+		$this->addBehavior('Acl.Acl', ['type' => 'requester']);
+		$this->addBehavior('Timestamp');
 
-        $this->hasMany('AccessManager.Roles', [
-            'foreignKey' => 'group_id',
-            'className' => 'AccessManager.Roles'
-        ]);
-        $this->hasMany('AccessManager.Users', [
-            'foreignKey' => 'group_id',
-            'className' => 'AccessManager.Users'
-        ]);
-    }
+		$this->hasMany('AccessManager.Roles', [
+			'foreignKey' => 'group_id',
+			'className' => 'AccessManager.Roles'
+		]);
+		$this->hasMany('AccessManager.Users', [
+			'foreignKey' => 'group_id',
+			'className' => 'AccessManager.Users'
+		]);
+		
+		$session = new Session();
 
-    /**
-     * Default validation rules.
-     *
-     * @param \Cake\Validation\Validator $validator Validator instance.
-     * @return \Cake\Validation\Validator
-     */
-    public function validationDefault(Validator $validator)
-    {
-        $validator
-            ->integer('id')
-            ->allowEmpty('id', 'create');
+		// IDs do usuário logado
+		$User = $session->read('Auth.User');
+		$this->group_id = $User['group_id'];
+		$this->role_id = $User['role_id'];
+		$this->user_id = $User['id'];
+		$this->restrict_group = $User['group']['restrict'];
+	}
 
-        $validator
-            ->scalar('name')
-            ->requirePresence('name', 'create')
-            ->notEmpty('name');
+	/**
+	 * Default validation rules.
+	 *
+	 * @param \Cake\Validation\Validator $validator Validator instance.
+	 * @return \Cake\Validation\Validator
+	 */
+	public function validationDefault(Validator $validator)
+	{
+		$validator
+			->integer('id')
+			->allowEmpty('id', 'create');
 
-        return $validator;
-    }
+		$validator
+			->scalar('name')
+			->requirePresence('name', 'create')
+			->notEmpty('name');
+
+		return $validator;
+	}
+
+	/**
+	 * beforeFind
+	 *
+	 * Controle de acesso por Group restrict
+	 */
+   public function beforeFind($event, $query, $options, $primary) {
+
+   		if($primary) {
+
+			// Group restrict
+			if( Configure::read('AccessManager.Groups.restrict_data_by_group')===true ) {
+
+				if($this->restrict_group != null) {
+
+					$query->where([
+						'OR' => [
+							'Groups.restrict >'=>$this->restrict_group
+						]
+					]);
+				}
+			}
+		}
+
+		return $query;      
+	}
+
 }

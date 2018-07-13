@@ -12,7 +12,9 @@ class CreateRoles extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('roles');
+        $table = $this->table('roles', [
+            'collation' => 'utf8_general_ci'
+        ]);
         $table->addColumn('group_id', 'integer', [
             'default' => null,
             'limit' => 11,

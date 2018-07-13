@@ -14,75 +14,96 @@ use Cake\Core\Configure;
 class GroupsController extends AppController
 {
 
-    public function initialize() {
-        parent::initialize();
-    }
+	public function initialize() {
+		parent::initialize();
+	}
 
 /**
  ==== FUNÇÕES DE CRUD ====
  */
-    public function index() {
-        $groups = $this->paginate($this->Groups);
-        $this->set(compact('groups'));
-    }
+	public function index() {
 
-    public function view($id = null) {
-        $group = $this->Groups->get($id, [
-            'contain' => ['Roles', 'Users']
-        ]);
-        $this->set('group', $group);
-    }
+		$groups = $this->paginate($this->Groups);
+		$this->set(compact('groups'));
+	}
 
-    public function add() {
+	public function view($id = null) {
 
-        $group = $this->Groups->newEntity();
-        if ($this->request->is('post')) {
+		if( !$this->Groups->exists(['Groups.id'=>$id]) ) {
 
-            $group = $this->Groups->patchEntity($group, $this->request->getData());
-            if ($this->Groups->save($group)) {
+			$this->Flash->raw(__('Nenhum registro encontrado.'));
+			return $this->redirect(['controller'=>'Pages', 'action'=>'display', 'message', 'plugin'=>false]);
+		}
 
-                $this->Flash->success(__('Os dados foram salvos.'));
-                return $this->redirect(['action' => 'index', 'plugin'=>'AccessManager']);
-            }
-            $this->Flash->error(__('Erro ao salvar os dados. Por favor, verifique e tente novamente ou entre em contato.'));
-        }
-        $this->set(compact('group'));
-    }
+		$group = $this->Groups->get($id, [
+			'contain' => ['Roles', 'Users']
+		]);
+		$this->set('group', $group);
+	}
 
-    public function edit($id = null) {
+	public function add() {
 
-        $group = $this->Groups->get($id, [
-            'contain' => []
-        ]);
+		$group = $this->Groups->newEntity();
+		if ($this->request->is('post')) {
 
-        if ($this->request->is(['patch', 'post', 'put'])) {
+			$group = $this->Groups->patchEntity($group, $this->request->getData());
+			if ($this->Groups->save($group)) {
 
-            $group = $this->Groups->patchEntity($group, $this->request->getData());
-            if ($this->Groups->save($group)) {
+				$this->Flash->success(__('Os dados foram salvos.'));
+				return $this->redirect(['action' => 'index', 'plugin'=>'AccessManager']);
+			}
+			$this->Flash->error(__('Erro ao salvar os dados. Por favor, verifique e tente novamente ou entre em contato.'));
+		}
+		$this->set(compact('group'));
+	}
 
-                $this->Flash->success(__('Os dados foram salvos.'));
+	public function edit($id = null) {
 
-                return $this->redirect(['action' => 'index', 'plugin'=>'AccessManager']);
-            }
-            $this->Flash->error(__('Erro ao salvar os dados. Por favor, verifique e tente novamente ou entre em contato.'));
-        }
-        $this->set(compact('group'));
-    }
+		if( !$this->Groups->exists(['Groups.id'=>$id]) ) {
 
-    public function delete($id = null) {
+			$this->Flash->raw(__('Nenhum registro encontrado.'));
+			return $this->redirect(['controller'=>'Pages', 'action'=>'display', 'message', 'plugin'=>false]);
+		}
 
-        $this->request->allowMethod(['post', 'delete']);
-        $group = $this->Groups->get($id);
+		$group = $this->Groups->get($id, [
+			'contain' => []
+		]);
 
-        if ($this->Groups->delete($group)) {
+		if ($this->request->is(['patch', 'post', 'put'])) {
 
-            $this->Flash->success(__('O registro foi excluido.'));
-        }
-        else {
+			$group = $this->Groups->patchEntity($group, $this->request->getData());
+			if ($this->Groups->save($group)) {
 
-            $this->Flash->error(__('Erro ao excluir o registro. Por favor, tente novamente ou entre em contato.'));
-        }
+				$this->Flash->success(__('Os dados foram salvos.'));
 
-        return $this->redirect(['action' => 'index', 'plugin'=>'AccessManager']);
-    }
+				return $this->redirect(['action' => 'index', 'plugin'=>'AccessManager']);
+			}
+			$this->Flash->error(__('Erro ao salvar os dados. Por favor, verifique e tente novamente ou entre em contato.'));
+		}
+		$this->set(compact('group'));
+	}
+
+	public function delete($id = null) {
+
+		$this->request->allowMethod(['post', 'delete']);
+		
+		if( !$this->Groups->exists(['Groups.id'=>$id]) ) {
+
+			$this->Flash->raw(__('Nenhum registro encontrado.'));
+			return $this->redirect(['controller'=>'Pages', 'action'=>'display', 'message', 'plugin'=>false]);
+		}
+
+		$group = $this->Groups->get($id);
+
+		if ($this->Groups->delete($group)) {
+
+			$this->Flash->success(__('O registro foi excluido.'));
+		}
+		else {
+
+			$this->Flash->error(__('Erro ao excluir o registro. Por favor, tente novamente ou entre em contato.'));
+		}
+
+		return $this->redirect(['action' => 'index', 'plugin'=>'AccessManager']);
+	}
 }

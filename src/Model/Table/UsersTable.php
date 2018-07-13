@@ -5,6 +5,8 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Cake\Network\Session;
+use Cake\Core\Configure;
 
 /**
  * Users Model
@@ -53,6 +55,16 @@ class UsersTable extends Table
 			'className' => 'AccessManager.Roles'
 		]);
 		$this->hasOne('AccessManager.Profiles');
+		
+		$session = new Session();
+
+		// IDs do usuário logado
+		$User = $session->read('Auth.User');
+		$this->group_id = $User['group_id'];
+		$this->role_id = $User['role_id'];
+		$this->user_id = $User['id'];
+		$this->restrict_group = $User['group']['restrict'];
+		$this->restrict_role = $User['role']['restrict'];
 	}
 
 	/**
@@ -134,6 +146,49 @@ class UsersTable extends Table
 		return $rules;
 	}
 
+ 	/**
+	 * beforeFind
+	 *
+	 * Controle de acesso por GroupID and RoleID
+	 */
+	public function beforeFind($event, $query, $options, $primary) {
+
+		if($primary) {
+
+			// Group restrict
+			if( Configure::read('AccessManager.Users.restrict_data_by_group')===true ) {
+
+				if($this->user_id != null and $this->restrict_group != null) {
+
+					$query->contain(['Groups']);
+					$query->where([
+						'OR' => [
+							'Groups.restrict >'=>$this->restrict_group,
+							'Users.id'=>$this->user_id
+						]
+					]);
+				}
+			}
+
+			// Role restrict
+			if( Configure::read('AccessManager.Users.restrict_data_by_group')===true ) {
+
+				if($this->user_id != null and $this->restrict_role != null) {
+
+					$query->contain(['Roles']);
+					$query->where([
+						'OR' => [
+							'Roles.restrict >'=>$this->restrict_role,
+							'Users.id'=>$this->user_id
+						]
+					]);
+				}
+			}
+		}
+
+	    return $query;    	
+    }
+
 	/**
 	 * Adiciona os dados associados de profile na sessão de usuário ao logar
 	 *
@@ -143,11 +198,11 @@ class UsersTable extends Table
 		return $query->contain([
 			'Groups' => function ($q) {
 				return $q
-					->select(['name']);
+					->select(['name', 'restrict']);
 			}, 
 			'Roles' => function ($q) {
 				return $q
-					->select(['name']);
+					->select(['name', 'restrict']);
 			}, 
 			'Profiles' => function ($q) {
 				return $q
@@ -160,6 +215,4 @@ class UsersTable extends Table
 			}
 		]);
 	}
-
-
 }

@@ -19,21 +19,15 @@
 				<td title="<?= 'Group ID: '.$r->group->id ?>"><?= h($r->group->name) ?></td>
 				<td><?= h($r->created) ?></td>
 				<td class="actions" style="white-space:nowrap">
-					<div id="dropdown-actions" class="btn-group pull-right">
-						<a href="#" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-							<i class="fa fa-menu"></i> Mais&nbsp;&nbsp; <span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li>
-								<?= $this->Html->link(__('Detalhes'), ['controller'=>'Roles', 'action'=>'view', $r->id, 'plugin'=>'AccessManager']) ?>
-							</li>
-							<li>
-								<?= $this->Html->link(__('Editar'), ['controller'=>'Roles', 'action'=>'edit', $r->id, 'plugin'=>'AccessManager']) ?>
-							</li>
-							<li>
-								<?= $this->Form->postLink(__('Excluir'), ['action' => 'delete', $r->id, 'plugin'=>'AccessManager'], ['confirm' => __('Confirma a exclusão deste registro?')]) ?>
-							</li>
-						</ul>
-					</div>			
+					<?php
+						echo $this->element('Layout/index_crud-buttons',
+							[
+								'id'=>$r->id,
+								'confirm'=>"Confirma a exclusão deste registro?",
+								'plugin'=>'AccessManager'
+							]
+						);
+					?>
 				</td>
 			</tr>
 			<?php endforeach; ?>

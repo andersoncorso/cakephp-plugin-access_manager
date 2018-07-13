@@ -21,21 +21,15 @@
 				<td><?= h($u->email) ?></td>
 				<td><?= ($u->active)?'<span class="label label-success">Ativado</label>':'<span class="label label-default">Desativado</label>' ?></td>
 				<td class="actions" style="white-space:nowrap">
-					<div id="dropdown-actions" class="btn-group pull-right">
-						<a href="#" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-							<i class="fa fa-menu"></i> Mais&nbsp;&nbsp; <span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li>
-								<?= $this->Html->link(__('Detalhes'), ['controller'=>'Users', 'action'=>'view', $u->id, 'plugin'=>'AccessManager']) ?>
-							</li>
-							<li>
-								<?= $this->Html->link(__('Editar'), ['controller'=>'Users', 'action'=>'edit', $u->id, 'plugin'=>'AccessManager']) ?>
-							</li>
-							<li>
-								<?= $this->Form->postLink(__('Excluir'), ['action' => 'delete', $u->id, 'plugin'=>'AccessManager'], ['confirm' => __('Confirma a exclusão deste registro?')]) ?>
-							</li>
-						</ul>
-					</div>			
+					<?php
+						echo $this->element('Layout/index_crud-buttons',
+							[
+								'id'=>$u->id,
+								'confirm'=>"Confirma a exclusão deste registro?",
+								'plugin'=>'AccessManager'
+							]
+						);
+					?>
 				</td>
 			</tr>
 			<?php endforeach; ?>

@@ -57,6 +57,13 @@ class ProfilesController extends AppController
 	}
 
 	public function view($id = null) {
+
+		if( !$this->Profiles->exists(['Profiles.id'=>$id]) ) {
+
+			$this->Flash->raw(__('Nenhum registro encontrado.'));
+			return $this->redirect(['controller'=>'Pages', 'action'=>'display', 'message', 'plugin'=>false]);
+		}
+
 		$profile = $this->Profiles->get($id, [
 			'contain' => ['Users', 'Estados', 'Municipios']
 		]);
@@ -65,6 +72,12 @@ class ProfilesController extends AppController
 	}
 
 	public function edit($id = null) {
+
+		if( !$this->Profiles->exists(['Profiles.id'=>$id]) ) {
+
+			$this->Flash->raw(__('Nenhum registro encontrado.'));
+			return $this->redirect(['controller'=>'Pages', 'action'=>'display', 'message', 'plugin'=>false]);
+		}
 
 		$profile = $this->Profiles->get($id, [
 			'contain' => ['Users']
@@ -138,6 +151,12 @@ class ProfilesController extends AppController
 	public function delete($id = null) {
 
 		$this->request->allowMethod(['post', 'delete']);
+
+		if( !$this->Profiles->exists(['Profiles.id'=>$id]) ) {
+
+			$this->Flash->raw(__('Nenhum registro encontrado.'));
+			return $this->redirect(['controller'=>'Pages', 'action'=>'display', 'message', 'plugin'=>false]);
+		}
 
 		$profile = $this->Profiles->get($id);
 		if ($this->Profiles->delete($profile)) {

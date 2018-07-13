@@ -12,7 +12,9 @@ class CreateProfiles extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('profiles');
+        $table = $this->table('profiles', [
+            'collation' => 'utf8_general_ci'
+        ]);
         $table->addColumn('user_id', 'integer', [
             'default' => null,
             'limit' => 11,

@@ -12,7 +12,9 @@ class CreateGroups extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('groups');
+        $table = $this->table('groups', [
+            'collation' => 'utf8_general_ci'
+        ]);
         $table->addColumn('name', 'string', [
             'default' => null,
             'limit' => 100,

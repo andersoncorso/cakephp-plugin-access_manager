@@ -22,6 +22,7 @@ class RolesController extends AppController
  ==== FUNÇÕES DE CRUD ====
  */
 	public function index() {
+
 		$this->paginate = [
 			'contain' => ['Groups']
 		];
@@ -31,6 +32,13 @@ class RolesController extends AppController
 	}
 
 	public function view($id = null) {
+		
+		if( !$this->Roles->exists(['Roles.id'=>$id]) ) {
+
+			$this->Flash->raw(__('Nenhum registro encontrado.'));
+			return $this->redirect(['controller'=>'Pages', 'action'=>'display', 'message', 'plugin'=>false]);
+		}
+
 		$role = $this->Roles->get($id, [
 			'contain' => ['Groups', 'Users']
 		]);
@@ -57,6 +65,12 @@ class RolesController extends AppController
 
 	public function edit($id = null) {
 
+		if( !$this->Roles->exists(['Roles.id'=>$id]) ) {
+
+			$this->Flash->raw(__('Nenhum registro encontrado.'));
+			return $this->redirect(['controller'=>'Pages', 'action'=>'display', 'message', 'plugin'=>false]);
+		}
+
 		$role = $this->Roles->get($id, [
 			'contain' => []
 		]);
@@ -77,6 +91,12 @@ class RolesController extends AppController
 	}
 
 	public function delete($id = null) {
+
+		if( !$this->Roles->exists(['Roles.id'=>$id]) ) {
+
+			$this->Flash->raw(__('Nenhum registro encontrado.'));
+			return $this->redirect(['controller'=>'Pages', 'action'=>'display', 'message', 'plugin'=>false]);
+		}
 
 		$this->request->allowMethod(['post', 'delete']);
 		$role = $this->Roles->get($id);

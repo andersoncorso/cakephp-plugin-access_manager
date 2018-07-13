@@ -1,29 +1,33 @@
-<?php use Cake\Core\Configure; ?>
 <!-- File: src/Template/Users/login.ctp -->
 <?php $this->layout = 'AdminLTE.login'; ?>
 
-<?php if($this->request->session()->read('Flash')): ?>
-	<div class="row">
-		<?= $this->Flash->render(); ?>
-		<?= $this->Flash->render('auth'); ?>
-	</div>
-<?php else: ?>
-	<p class="login-box-msg">
-		<?= __('Faça login para iniciar sua sessão') ?>
-	</p>
-<?php endif; ?>
+<?= $this->Form->create() ?>
 
-<?= $this->element('Forms/users-login') ?>
-
-<br>
-
-<?php if(Configure::read('Theme.login.show_remember')): ?>
-	<p class="text-right">
+	<div class="form-group has-feedback">
 		<?php 
-			echo $this->Html->link(__('Recuperar senha'),
-				['controller'=>'Users', 'action'=>'recoverPassword', 'plugin'=>'AccessManager'],
-				['class'=>'btn-link']
+			echo $this->Form->email('email', 
+				['class'=>'form-control input-lg', 'placeholder'=>'E-mail', 'required'=>'required']
 			);
 		?>
-	</p>
-<?php endif; ?>
+		<span class="fa fa-envelope form-control-feedback"></span>
+	</div>
+	<div class="form-group has-feedback">
+		<?php 
+			echo $this->Form->password('password', 
+				['class'=>'form-control input-lg', 'placeholder'=>'Senha', 'required'=>'required']
+			);
+		?>
+		<span class="fa fa-unlock form-control-feedback"></span>
+	</div>
+	<div class="row">
+		<div class="col-xs-12">
+			<?php 
+				echo $this->Form->button('Acessar', 
+					['class'=>'btn btn-primary btn-block btn-flat btn-lg pull-right', 
+					'id'=>'loadButton', 'data-loading-text'=>'Aguarde...', 'submitContainer'=>null]
+				);
+			?>
+		</div>
+	</div>
+
+<?= $this->Form->end() ?>

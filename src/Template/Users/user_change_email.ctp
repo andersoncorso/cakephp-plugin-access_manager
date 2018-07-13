@@ -1,6 +1,6 @@
 <!-- page header --> 
 <section class="content-header">
-	<h1>Minha conta <small>E-mail</small></h1>
+	<h1>Meu login <small>E-mail</small></h1>
 	<ol class="breadcrumb">
 		<li>
 			<?php 
