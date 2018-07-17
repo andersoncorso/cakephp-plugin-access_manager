@@ -1,8 +1,15 @@
 <!-- page header --> 
 <section class="content-header">
-	<h1><?= __('Lista de Usuários') ?>
+	<h1>
+		<?= __('Lista de usuários') ?>&nbsp;
 		<div class="pull-right">
-			<?= $this->Html->link('<span class="fa fa-plus"></span>&nbsp;&nbsp;'.__('Cadastrar'), ['controller'=>'Users', 'action'=>'add', 'plugin'=>'AccessManager'], ['class'=>'btn btn-primary btn-xs', 'escape'=>false]) ?>
+			<?php
+				// Novo Assinante
+				echo $this->Html->link('<span class="fa fa-plus"></span>&nbsp;&nbsp;'.__('Novo usuário'),
+					['controller'=>'Users', 'action'=>'add', 'plugin'=>'AccessManager'],
+					['class'=>'btn btn-default', 'escape'=>false]
+				);
+			?>
 		</div>
 	</h1>
 </section>
@@ -12,7 +19,7 @@
 	<div class="row">
 
 		<div class="col-xs-12">
-			<div class="box box-primary">
+			<div class="box box-default">
 				<div class="box-body">
 					<?= $this->element('Table/users-index') ?>
 				</div>

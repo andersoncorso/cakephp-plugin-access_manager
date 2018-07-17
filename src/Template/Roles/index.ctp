@@ -1,11 +1,19 @@
 <!-- page header --> 
 <section class="content-header">
-    <h1><?= __('Lista de Funções') ?>
+    <h1>
+        <?= __('Lista de funções') ?>&nbsp;
         <div class="pull-right">
-            <?= $this->Html->link('<span class="fa fa-plus"></span>&nbsp;&nbsp;'.__('Cadastrar'), ['controller'=>'Roles', 'action'=>'add', 'plugin'=>'AccessManager'], ['class'=>'btn btn-primary btn-xs', 'escape'=>false]) ?>
+            <?php
+                // Novo Assinante
+                echo $this->Html->link('<span class="fa fa-plus"></span>&nbsp;&nbsp;'.__('Nova função'),
+                    ['controller'=>'Roles', 'action'=>'add', 'plugin'=>'AccessManager'],
+                    ['class'=>'btn btn-default', 'escape'=>false]
+                );
+            ?>
         </div>
     </h1>
 </section>
+
 
 <!-- page content -->
 <section class="content">

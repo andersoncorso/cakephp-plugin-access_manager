@@ -1,15 +1,24 @@
+<!-- page header --> 
+<section class="content-header">
+	<h1><?= __('Novo grupo') ?>&nbsp;</h1>
+	<ol class="breadcrumb">
+		<li>
+			<?php 
+				echo $this->Html->link('<i class="fa fa-angle-double-left"></i> '.__('Voltar'),
+					'javascript:window.history.back()',
+					['escape' => false]
+				);
+			?>
+		</li>
+	</ol>
+</section>
+
 <!-- page content -->
 <section class="content">
 	<div class="row">
 
 		<div class="col-xs-12">
 			<div class="box box-primary">
-				<div class="box-header with-border">
-					<i class="fa fa-edit"></i>
-					<h3 class="box-title">
-						<?= __('Cadastrar Grupo') ?>
-					</h3>
-				</div>
 				<div class="box-body">
 					<?= $this->element('Forms/groups-add') ?>
 				</div>
