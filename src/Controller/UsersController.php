@@ -20,7 +20,7 @@ class UsersController extends AppController
 	public function initialize() {
 		parent::initialize();
 		
-		$this->Auth->allow(['login', 'logout', 'recoverPassword']);
+		$this->Auth->allow(['login', 'logout', 'recoverPassword', 'changePasswordByHash']);
 
 		// IDs do usuário logado
 		$this->group_id = $this->Auth->user('group_id');
@@ -335,62 +335,94 @@ class UsersController extends AppController
 
 	public function recoverPassword(){
 
-		// $user = $this->Users->newEntity();
+		$user = $this->Users->newEntity();
 
-		// if ($this->request->is(['post']) and $this->request->getData('email')) {
+		if ($this->request->is(['post']) and $this->request->getData('email')) {
 
-		// 	// encontra o registro na tabela
-		// 	$email = $this->request->getData('email');
-		// 	$query = $this->Users->findByEmail($email);
-		// 	$query
-		// 		->where(['active'=>true]);
+			// encontra o registro na tabela
+			$email = $this->request->getData('email');
+			$query = $this->Users->findByEmail($email);
+			$query
+				->where(['active'=>true]);
 			
-		// 	if (!$query->isEmpty()) {
+			if (!$query->isEmpty()) {
 			
-		// 		$user = $query->first();
+				$user = $query->first();
 				
-		// 		// gera uma nova hash de recuperação
-		// 		$salt = Configure::read('Security.salt');
-		// 		$rand = mt_rand(1,999999999);
-		// 		$rand_v2 = mt_rand(1,999999999);
-		// 		$user->recovery_hash = hash('sha256', $email.$rand.$salt.$rand_v2);
+				// gera uma nova hash de recuperação
+				$salt = Configure::read('Security.salt');
+				$rand = mt_rand(1,999999999);
+				$rand_v2 = mt_rand(1,999999999);
+				$user->recovery_hash = hash('sha256', $email.$rand.$salt.$rand_v2);
 
-		// 		// update Field recovery_hash
-		// 		if ($this->Users->save($user)) {
+				// update Field recovery_hash
+				if ($this->Users->save($user)) {
 					
-		// 			// // envia e-mail
-		// 			$Email = new Email('default');
-		// 			$Email
-		// 				->emailFormat('html')
-		// 				->template('AccessManager.recoveryPassword')
-		// 				->to($user->email)
-		// 				->subject('IRRIGO - Recuperar senha')
-		// 				->set([
-		// 					'recovery_hash' => $user->recovery_hash
-		// 				]);						
-		// 			if ( $Email->send() ) {
+					// // envia e-mail
+					$Email = new Email('default');
+					$Email
+						->emailFormat('html')
+						->template('AccessManager.recoveryPassword')
+						->to($user->email)
+						->subject('Recuperar senha')
+						->set([
+							'recovery_hash' => $user->recovery_hash
+						]);						
+					if ( $Email->send() ) {
 
-		// 				$this->Flash->raw(__('Foi enviado um e-mail com o link para alteração da sua senha!'));
-		// 				$this->redirect(['controller'=>'pages', 'action'=>'display', 'message', 'plugin'=>false]);
-		// 			}
-		// 		}
-		// 		else{
+						$this->Flash->raw(__('Foi enviado um e-mail com o link para alteração da sua senha!'));
+						$this->redirect(['controller'=>'pages', 'action'=>'display', 'message', 'plugin'=>false]);
+					}
+				}
+				else{
 
-		// 			$this->Flash->error(__('Falha na solicitação. Por favor, verifique e tente novamente ou entre em contato.'));
-		// 		}
-		// 	}
-		// 	else{
+					$this->Flash->error(__('Falha na solicitação. Por favor, verifique e tente novamente ou entre em contato.'));
+				}
+			}
+			else{
 
-		// 		$this->Flash->error(__('Nenhum registro encontrado com esse e-mail!'));
-		// 	}
-		// }
+				$this->Flash->error(__('Nenhum registro encontrado com esse e-mail!'));
+			}
+		}
 
-		// $this->set(compact('user'));
+		$this->set(compact('user'));
 	}
 
 	public function changePasswordByHash($hash=null) {
 
-		// 
+		// encontra o registro na tabela
+		$query = $this->Users->findByRecoveryHash($hash);
+		$query
+			->where(['active'=>true]);
+
+		if(!$query->isEmpty()){
+
+			$user = $query->first();
+
+			// default params
+			$user->recovery_hash = null;
+
+			if ($this->request->is(['post'])) {
+
+				$user = $this->Users->patchEntity($user, $this->request->getData());
+
+				if($this->Users->save($user)){
+
+					$this->Flash->success('Sua senha foi atualizada!');
+					return $this->redirect(['controller'=>'Users', 'action'=>'login', 'plugin'=>'AccessManager']);
+				}
+				else{
+
+					$this->Flash->error(__('Falha ao atualizar sua senha. Por favor, verifique e tente novamente ou entre em contato.'));
+					return $this->redirect(['controller'=>'Pages', 'action'=>'display', 'message', 'plugin'=>false]);
+				}			
+			}
+		}
+		else{
+
+			$this->Flash->error(__('Usuário não encontrado! Por favor, verifique e tente novamente ou entre em contato.'));
+			return $this->redirect(['controller'=>'Pages', 'action'=>'display', 'message', 'plugin'=>false]);
+		}
 	}
 
 

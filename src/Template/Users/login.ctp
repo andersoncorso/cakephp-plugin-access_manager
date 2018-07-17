@@ -1,33 +1,30 @@
-<!-- File: src/Template/Users/login.ctp -->
-<?php $this->layout = 'AdminLTE.login'; ?>
+<?php
+	use Cake\Core\Configure;
+	$this->layout = 'AdminLTE.login';
+?>
 
-<?= $this->Form->create() ?>
-
-	<div class="form-group has-feedback">
-		<?php 
-			echo $this->Form->email('email', 
-				['class'=>'form-control input-lg', 'placeholder'=>'E-mail', 'required'=>'required']
-			);
-		?>
-		<span class="fa fa-envelope form-control-feedback"></span>
-	</div>
-	<div class="form-group has-feedback">
-		<?php 
-			echo $this->Form->password('password', 
-				['class'=>'form-control input-lg', 'placeholder'=>'Senha', 'required'=>'required']
-			);
-		?>
-		<span class="fa fa-unlock form-control-feedback"></span>
-	</div>
+<?php if($this->request->session()->read('Flash')): ?>
 	<div class="row">
-		<div class="col-xs-12">
-			<?php 
-				echo $this->Form->button('Acessar', 
-					['class'=>'btn btn-primary btn-block btn-flat btn-lg pull-right', 
-					'id'=>'loadButton', 'data-loading-text'=>'Aguarde...', 'submitContainer'=>null]
-				);
-			?>
-		</div>
+		<?= $this->Flash->render(); ?>
+		<?= $this->Flash->render('auth'); ?>
 	</div>
+<?php else: ?>
+	<p class="login-box-msg">
+		<?= __('Faça login para iniciar sua sessão') ?>
+	</p>
+<?php endif; ?>
 
-<?= $this->Form->end() ?>
+<?= $this->element('Forms/users-login') ?>
+
+<br>
+
+<?php if(Configure::read('Theme.login.show_remember')): ?>
+	<p class="text-right">
+		<?php 
+			echo $this->Html->link(__('Recuperar senha'),
+				['controller'=>'Users', 'action'=>'recoverPassword', 'plugin'=>'AccessManager'],
+				['class'=>'btn-link']
+			);
+		?>
+	</p>
+<?php endif; ?>
