@@ -4,6 +4,7 @@
     "type": "cakephp-plugin",
     "license": "MIT",
     "require": {
+        "ivanamat/cakephp3-aclmanager"
     },
     "autoload": {
         "psr-4": {
