@@ -6,6 +6,11 @@
     "require": {
         "ivanamat/cakephp3-aclmanager": "1.*"
     },
+	"require-dev": {
+	},
+	"suggest": {
+		"maiconpinto/cakephp-adminlte-theme": "Recomenda-se o uso do plugin AdminLTE"
+	},
     "autoload": {
         "psr-4": {
             "AccessManager\\": "src"
